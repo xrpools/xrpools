@@ -27,7 +27,7 @@ import { Label } from "@radix-ui/react-label";
 const invoices = [
   {
     poolAddress: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
-    poolName: "XRP reserve locked fund #3",
+    poolName: "XRP reserve fund #3",
     asset: "XRP",
     description: "4,384,948",
     interestOffered: "4.2%",
@@ -164,37 +164,49 @@ export const Pool = ({
                       </DialogTrigger>
                       <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
-                          <DialogTitle>Edit profile</DialogTitle>
+                          <DialogTitle>KYC verification</DialogTitle>
                           <DialogDescription>
-                            Make changes to your profile here. Click save when
-                            you're done.
+                            The issuer requires KYC verification for compliance. Please provide information below for verification.
                           </DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
                           <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="name" className="text-right">
-                              Name
+                              Firstname
                             </Label>
                             <Input
-                              id="name"
-                              value="Pedro Duarte"
+                              id="firstname"
+                              value="Satoshi"
                               className="col-span-3"
                             />
                           </div>
+
+                          <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="name" className="text-right">
+                              Lastname
+                            </Label>
+                            <Input
+                              id="lastname"
+                              value="Nakamoto"
+                              className="col-span-3"
+                            />
+                          </div>
+                          
                           <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="username" className="text-right">
-                              Username
+                              Country  of residency
                             </Label>
                             <Input
-                              id="username"
-                              value="@peduarte"
+                              id="residency"
+                              value="France"
                               className="col-span-3"
                             />
                           </div>
+
                         </div>
                         <DialogFooter>
                           <DialogFooter>
-                            <Button type="submit" onClick={() => setHaveEnrolled(true)}>Save changes</Button>
+                            <Button type="submit" onClick={() => setHaveEnrolled(true)}>Save</Button>
                           </DialogFooter>
                         </DialogFooter>
                       </DialogContent>

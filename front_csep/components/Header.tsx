@@ -14,15 +14,15 @@ export const Header = ({setAddress}:{setAddress:(_address : string)=>void}) => {
   };
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
-      <div className="mx-auto px-4 py-2 flex justify-between items-center">
+      <div className="mx-auto px-20 py-2 flex justify-between items-center">
         <div className="logo ml-4">
           <b>{`{XRPools}`}</b>
         </div>
 
-        <div className="login">
+        <div className="login px-20">
           {user.address ? (
             <div>
-              <p className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <p className="bg-neutral-700 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded">
                 {user.address.slice(0, 3) +
                   "..." +
                   user.address.slice(user.address.length - 3)}
@@ -32,9 +32,9 @@ export const Header = ({setAddress}:{setAddress:(_address : string)=>void}) => {
             <>
               <button
                 onClick={() => connectWallet()}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-neutral-700 hover:bg-neutral-600 text-white font-bold py-2 px-4 rounded"
               >
-                Wallet connect
+                Connect
               </button>
             </>
           )}
