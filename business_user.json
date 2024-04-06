@@ -1,0 +1,25 @@
+{
+    "business" : {
+        "id": 18475859495,
+        "name": "Satoshi Bank",
+        "country": "France",
+        "parent" : {
+            "proof_id" : "72439743048930R573059374039",
+            "ownership": 1
+        },
+        "kyc" : {
+            "partner" : "sumsub",
+            "status": "accepted",
+            "timestamp": 1712395251,
+            "proof_id" : "72439743048930R573059374039"
+        },
+        "whitelisted_addresses" : [
+            "rHmm7y7LPNfC3VPCDKn9LtUU1wqMCkffFa",
+            "rUHDJCkpMnA16ogQqvt5PowkQTXTcNL64r"
+        ]
+    }
+}
+
+Comment:
+Banks are required to identify ultimate beneficiary owner of a busines
+The owner  could be another business or an individual person

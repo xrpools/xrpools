@@ -1,0 +1,29 @@
+{
+    "individual" : {
+        "firstname": "Satoshi",
+        "lastname": "Namamoto",
+        "email": "satoshi@gmx.com",
+        "dob": "19001231",
+        "mobilePhone": 18475859495,
+        "identity_document" : 
+        {
+            "type": "passport",
+            "number" : "01CE11111",
+            "issued_country" : "france",
+            "expiry date": 20301231
+        },
+        "kyc" : {
+            "partner" : "sumsub",
+            "status": "accepted",
+            "timestamp": 1712395251,
+            "proof_id" : "72439743048930R573059374039"
+        },
+        "whitelisted_addresses" : [
+            "rHmm7y7LPNfC3VPCDKn9LtUU1wqMCkffFa",
+            "rUHDJCkpMnA16ogQqvt5PowkQTXTcNL64r"
+        ]
+    }
+}
+
+Comment:
+Banks are required to refresh client informations at least once a year
