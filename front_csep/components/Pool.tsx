@@ -13,6 +13,16 @@ import { Button } from "./ui/button";
 import sdk from "@crossmarkio/sdk";
 import { PoolModel } from "./models/pool";
 import { Input } from "./ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
+import { Label } from "@radix-ui/react-label";
 
 const invoices = [
   {
@@ -57,8 +67,10 @@ export const Pool = ({
   _address: string;
   setHoldingPool: (_holdingPool: PoolModel) => void;
 }) => {
-  const [haveEnrolled, setHaveEnrolled] = useState(true);
-  const [amount, setAmount] = useState(0);
+  const [haveEnrolled, setHaveEnrolled] = useState(false);
+  const [amount, setAmount] = useState(
+    {} as { poolAddress: string; amount: number }
+  );
 
   const payment = async () => {
     const rippleOffset = 946684800; //ripple initial epoch
@@ -67,12 +79,12 @@ export const Pool = ({
       new Date("2024-12-31T00:00:00Z").getTime() / 1000
     );
     const release_date_ripple = release_date_unix - rippleOffset;
-    if (amount < 10) return;
+    if (amount.amount < 10) return;
     const tx = await sdk.methods.signAndSubmitAndWait({
       TransactionType: "EscrowCreate",
       Account: _address,
       Destination: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
-      Amount: `${amount*10**6}`,
+      Amount: `${amount.amount * 10 ** 6}`,
       CancelAfter: release_date_ripple,
       Condition:
         "A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100",
@@ -105,6 +117,7 @@ export const Pool = ({
             <TableHead>Remaining</TableHead>
             <TableHead>APY</TableHead>
             <TableHead>Duration</TableHead>
+            <TableHead>Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -116,16 +129,26 @@ export const Pool = ({
               <TableCell>{invoice.interestOffered}</TableCell>
               <TableCell>{invoice.lengthOfDeposit}</TableCell>
               <TableCell className="flex">
-                <Input
-                disabled={!sdk.sync.isConnected()}
-                  className="max-w-32 mx-auto"
-                  max={invoice.description}
-                  onChange={(e) => {setAmount(+e.target.value)}}
-                />
                 {haveEnrolled ? (
                   <>
+                    <Input
+                      disabled={!sdk.sync.isConnected()}
+                      className="max-w-32 mx-auto"
+                      max={invoice.description}
+                      onChange={(e) => {
+                        setAmount({
+                          amount: +e.target.value,
+                          poolAddress: invoice.poolAddress,
+                        });
+                      }}
+                    />
+
                     <Button
-                      disabled={!sdk.sync.isConnected() || amount < 10}
+                      disabled={
+                        !sdk.sync.isConnected() ||
+                        amount.amount < 10 ||
+                        amount.poolAddress !== invoice.poolAddress
+                      }
                       onClick={() => payment()}
                     >
                       Deposit
@@ -133,9 +156,49 @@ export const Pool = ({
                   </>
                 ) : (
                   <>
-                    <Button onClick={() => setHaveEnrolled(true)}>
-                      Enroll
-                    </Button>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button >
+                          Invest
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle>Edit profile</DialogTitle>
+                          <DialogDescription>
+                            Make changes to your profile here. Click save when
+                            you're done.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                          <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="name" className="text-right">
+                              Name
+                            </Label>
+                            <Input
+                              id="name"
+                              value="Pedro Duarte"
+                              className="col-span-3"
+                            />
+                          </div>
+                          <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="username" className="text-right">
+                              Username
+                            </Label>
+                            <Input
+                              id="username"
+                              value="@peduarte"
+                              className="col-span-3"
+                            />
+                          </div>
+                        </div>
+                        <DialogFooter>
+                          <DialogFooter>
+                            <Button type="submit" onClick={() => setHaveEnrolled(true)}>Save changes</Button>
+                          </DialogFooter>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </>
                 )}
               </TableCell>
