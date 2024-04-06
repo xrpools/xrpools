@@ -1,5 +1,7 @@
 # CryptoStable Escrow Pools (CSEP)
 
+Fractional Protocol
+
 ## Pitch Statement For CSEP
 
 - Unlock Crypto Earnings, Stabilize Markets
@@ -36,6 +38,10 @@ Our platform leverages the XRPL escrow function to allow crypto holders to safel
 - XRPL: For escrow functions and the secure, transparent handling of cryptocurrency assets.
 - Frontend: Basic web technologies for the interface (HTML, CSS, JavaScript).
 - Backend: Node.js for server-side logic, interfacing with XRPL, and managing user interactions.
+
+## Pools
+A bank chooses a currency (XRP, ETH, WBTC, USDT...) and an interest rate (5%), and requirements (Non US Person, KYC requirements, High Net Worth Individual...)
+
 
 ## Conclusion
 Our platform uniquely positions itself at the intersection of cryptocurrency and traditional finance, offering a novel solution to the dual challenges of earning potential for crypto holders and asset diversification for institutions. By leveraging the secure, transparent capabilities of XRPL, we propose a future where crypto assets are not just stored but actively contribute to market stability and individual growth.
