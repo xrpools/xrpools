@@ -1,7 +1,5 @@
 # CryptoStable Escrow Pools (CSEP)
 
-Fractional Protocol
-
 ## Pitch Statement For CSEP
 
 - Unlock Crypto Earnings, Stabilize Markets

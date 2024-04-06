@@ -25,10 +25,18 @@ const invoices = [
   {
     image: "INV002",
     poolName: "FirstRand South Africa bond 2025",
+    asset: "USDT",
+    description: "847,119",
+    interestOffered: "7.3%",
+    lengthOfDeposit: "1 year (fixed)",
+  },
+  {
+    image: "INV002",
+    poolName: "Bitcoin infrastructure mining Chile",
     asset: "WBTC",
     description: "150",
     interestOffered: "7.3%",
-    lengthOfDeposit: "1 year (fixed)",
+    lengthOfDeposit: "9 years (fixed)",
   },
   {
     image: "INV003",
