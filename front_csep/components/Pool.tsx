@@ -1,17 +1,16 @@
 "use client";
-
+import xrpl from "xrpl";
 import React, { useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
+import sdk from "@crossmarkio/sdk";
 
 const invoices = [
   {
@@ -45,11 +44,31 @@ const invoices = [
     description: "open end",
     interestOffered: "4.7%",
     lengthOfDeposit: "flexible",
-  }
+  },
 ];
 
-export const Pool = () => {
-  const [haveEnrolled, setHaveEnrolled] = useState(false);
+export const Pool = ({ _address }: { _address: string }) => {
+  const [haveEnrolled, setHaveEnrolled] = useState(true);
+
+  const payment = async () => {
+
+    const rippleOffset = 946684800 //ripple initial epoch
+
+    const release_date_unix = Math.floor( new Date("2024-12-31T00:00:00Z").getTime()/1000 );
+    const release_date_ripple = release_date_unix - rippleOffset;
+    console.log(release_date_ripple);
+    
+    await sdk.methods.signAndSubmitAndWait({
+      TransactionType: "EscrowCreate",
+      Account: _address,
+      Destination: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
+      Amount: "10"+"000000",
+      CancelAfter: release_date_ripple,
+      Condition:
+        "A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100",
+    });
+  };
+
   return (
     <div>
       <h2>Available Pools</h2>
@@ -62,7 +81,7 @@ export const Pool = () => {
             <TableHead>Remaining</TableHead>
             <TableHead>APY</TableHead>
             <TableHead className="text-center">Duration</TableHead>
-            <TableHead  className="text-center"></TableHead>
+            <TableHead className="text-center"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -73,14 +92,16 @@ export const Pool = () => {
               <TableCell>{invoice.description}</TableCell>
               <TableCell>{invoice.interestOffered}</TableCell>
               <TableCell>{invoice.lengthOfDeposit}</TableCell>
-              <TableCell  className="text-right">
+              <TableCell className="text-right">
                 {haveEnrolled ? (
                   <>
-                    <Button>Deposit</Button>
+                    <Button onClick={() => payment()}>Deposit</Button>
                   </>
                 ) : (
                   <>
-                    <Button onClick={()=>setHaveEnrolled(true)}>Deposit</Button>
+                    <Button onClick={() => setHaveEnrolled(true)}>
+                      Enrolled
+                    </Button>
                   </>
                 )}
               </TableCell>
