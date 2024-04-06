@@ -1,4 +1,4 @@
-# CryptoStable Escrow Pools (CSEP)
+# XRPool 
 
 ## Pitch Statement For CSEP
 
