@@ -1,10 +1,17 @@
-import Link from 'next/link'
+import { Dashboard } from "@/components/Dashboard";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
-export default function Home() {
+
+export default function ProviderHome() {
   return (
-    <div className="flex flex-col h-screen text-center">
-      <Link href="/client" class="flex-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">Launch app as a provider</Link>
-      <Link href="/bank" class="flex-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4">Launch app as a bank</Link>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <div className="flex-1 flex items-center justify-center">
+        <Dashboard />
+      </div>
+      <Footer />
+
     </div>
   );
 }
