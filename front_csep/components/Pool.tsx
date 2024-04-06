@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./ui/button";
 import sdk from "@crossmarkio/sdk";
+import { PoolModel } from "./models/pool";
+import { Input } from "./ui/input";
 
 const invoices = [
   {
-    image: "INV001",
+    poolAddress: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
     poolName: "XRP reserve locked fund #3",
     asset: "XRP",
     description: "4,384,948",
@@ -22,7 +24,7 @@ const invoices = [
     lengthOfDeposit: "5 years (fixed)",
   },
   {
-    image: "INV002",
+    poolAddress: "rHCde2G2447A9cTvNLLXtTxdG9GQ3qZAy1",
     poolName: "FirstRand South Africa bond 2025",
     asset: "USDT",
     description: "847,119",
@@ -30,7 +32,7 @@ const invoices = [
     lengthOfDeposit: "1 year (fixed)",
   },
   {
-    image: "INV002",
+    poolAddress: "rDmUtoNpmQmkpM6nqsDNoeAhwMR4U2jwMN",
     poolName: "Bitcoin infrastructure mining Chile",
     asset: "WBTC",
     description: "150",
@@ -38,7 +40,8 @@ const invoices = [
     lengthOfDeposit: "9 years (fixed)",
   },
   {
-    image: "INV003",
+    poolAddress:
+      "rxRpSNb1VktvzBz8JF2oJC6qaww6RZ7LwrL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
     poolName: "iShares $ Treasury Bond 1-3yr UCITS ETF",
     asset: "USDC",
     description: "open end",
@@ -47,26 +50,47 @@ const invoices = [
   },
 ];
 
-export const Pool = ({ _address }: { _address: string }) => {
+export const Pool = ({
+  _address,
+  setHoldingPool,
+}: {
+  _address: string;
+  setHoldingPool: (_holdingPool: PoolModel) => void;
+}) => {
   const [haveEnrolled, setHaveEnrolled] = useState(true);
+  const [amount, setAmount] = useState(0);
 
   const payment = async () => {
+    const rippleOffset = 946684800; //ripple initial epoch
 
-    const rippleOffset = 946684800 //ripple initial epoch
-
-    const release_date_unix = Math.floor( new Date("2024-12-31T00:00:00Z").getTime()/1000 );
+    const release_date_unix = Math.floor(
+      new Date("2024-12-31T00:00:00Z").getTime() / 1000
+    );
     const release_date_ripple = release_date_unix - rippleOffset;
-    console.log(release_date_ripple);
-    
-    await sdk.methods.signAndSubmitAndWait({
+    if (amount < 10) return;
+    const tx = await sdk.methods.signAndSubmitAndWait({
       TransactionType: "EscrowCreate",
       Account: _address,
       Destination: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
-      Amount: "10"+"000000",
+      Amount: `${amount*10**6}`,
       CancelAfter: release_date_ripple,
       Condition:
         "A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100",
     });
+    const depositedPool = invoices.find(
+      ({ poolAddress }) =>
+        poolAddress === tx.response.data.resp.result.Destination
+    );
+    console.log(+tx.response.data.resp.result.Amount / 10 ** 6);
+
+    if (depositedPool) {
+      const mappedPool = {
+        ...depositedPool,
+        amount: +tx.response.data.resp.result.Amount / 10 ** 6,
+        tx: tx.response.data.resp.result.hash,
+      };
+      setHoldingPool(mappedPool);
+    }
   };
 
   return (
@@ -76,31 +100,41 @@ export const Pool = ({ _address }: { _address: string }) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">Fund name</TableHead>
+            <TableHead>Fund name</TableHead>
             <TableHead>Asset</TableHead>
             <TableHead>Remaining</TableHead>
             <TableHead>APY</TableHead>
-            <TableHead className="text-center">Duration</TableHead>
-            <TableHead className="text-center"></TableHead>
+            <TableHead>Duration</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {invoices.map((invoice) => (
-            <TableRow key={invoice.image}>
+            <TableRow key={invoice.poolAddress}>
               <TableCell className="font-medium">{invoice.poolName}</TableCell>
               <TableCell>{invoice.asset}</TableCell>
               <TableCell>{invoice.description}</TableCell>
               <TableCell>{invoice.interestOffered}</TableCell>
               <TableCell>{invoice.lengthOfDeposit}</TableCell>
-              <TableCell className="text-right">
+              <TableCell className="flex">
+                <Input
+                disabled={!sdk.sync.isConnected()}
+                  className="max-w-32 mx-auto"
+                  max={invoice.description}
+                  onChange={(e) => {setAmount(+e.target.value)}}
+                />
                 {haveEnrolled ? (
                   <>
-                    <Button onClick={() => payment()}>Deposit</Button>
+                    <Button
+                      disabled={!sdk.sync.isConnected() || amount < 10}
+                      onClick={() => payment()}
+                    >
+                      Deposit
+                    </Button>
                   </>
                 ) : (
                   <>
                     <Button onClick={() => setHaveEnrolled(true)}>
-                      Enrolled
+                      Enroll
                     </Button>
                   </>
                 )}
