@@ -15,10 +15,12 @@
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "fast-text-encoding": "^1.0.6",
     "lucide-react": "^0.365.0",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-native-get-random-values": "^1.11.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "xrpl": "^3.0.0"

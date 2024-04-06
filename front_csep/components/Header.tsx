@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import sdk from "@crossmarkio/sdk";
-export const Header = ({setAddress}:{setAddress:(_address : string)=>void}) => {
+export const Header = (
+  { setAddress, setWss }: { setAddress:(_address : string) => void, setWss: (wss: string|null) => void }) => {
   const [user, setUser] = useState({ address: "" } as {
     address: string;
   });
@@ -11,6 +12,7 @@ export const Header = ({setAddress}:{setAddress:(_address : string)=>void}) => {
     const { response } = await sdk.methods.signInAndWait();
     setUser({ address: response.data.address });
     setAddress(response.data.address);
+    if (setWss) setWss(response.data.network.wss);
   };
   return (
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">

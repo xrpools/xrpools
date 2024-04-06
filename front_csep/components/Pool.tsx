@@ -26,7 +26,7 @@ import { Label } from "@radix-ui/react-label";
 
 const invoices = [
   {
-    poolAddress: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
+    poolAddress: "rDNCYaJJKS7Nbtr1A9ReERL53NXrjsnaSY",
     poolName: "XRP reserve fund #3",
     asset: "XRP",
     description: "4,384,948",
@@ -62,10 +62,10 @@ const invoices = [
 
 export const Pool = ({
   _address,
-  setHoldingPool,
+  addHoldingPool,
 }: {
   _address: string;
-  setHoldingPool: (_holdingPool: PoolModel) => void;
+  addHoldingPool: (_holdingPool: PoolModel) => void;
 }) => {
   const [haveEnrolled, setHaveEnrolled] = useState(false);
   const [amount, setAmount] = useState(
@@ -83,7 +83,7 @@ export const Pool = ({
     const tx = await sdk.methods.signAndSubmitAndWait({
       TransactionType: "EscrowCreate",
       Account: _address,
-      Destination: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
+      Destination: "rDNCYaJJKS7Nbtr1A9ReERL53NXrjsnaSY",
       Amount: `${amount.amount * 10 ** 6}`,
       CancelAfter: release_date_ripple,
       Condition:
@@ -93,7 +93,6 @@ export const Pool = ({
       ({ poolAddress }) =>
         poolAddress === tx.response.data.resp.result.Destination
     );
-    console.log(+tx.response.data.resp.result.Amount / 10 ** 6);
 
     if (depositedPool) {
       const mappedPool = {
@@ -101,7 +100,8 @@ export const Pool = ({
         amount: +tx.response.data.resp.result.Amount / 10 ** 6,
         tx: tx.response.data.resp.result.hash,
       };
-      setHoldingPool(mappedPool);
+      console.log(mappedPool)
+      addHoldingPool(mappedPool);
     }
   };
 
