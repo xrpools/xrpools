@@ -47,9 +47,11 @@
         const preparedEscrow = await client.autofill({
             "TransactionType": "EscrowCreate",
             "Account": wallet.classicAddress,
-            "Amount": xrpl.xrpToDrops("2"),
+            "Amount": xrpl.xrpToDrops("3"),
             "Destination": "rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM",
-            "FinishAfter": release_date_ripple
+            "CancelAfter": release_date_ripple,
+            "Condition": "A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100",
+
         })
 
           const max_ledger = preparedEscrow.LastLedgerSequence
