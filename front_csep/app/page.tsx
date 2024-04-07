@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function ProviderHome() {
   const [address,setAddress]=useState("");
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header setAddress={setAddress} />
       <div className="flex-1 flex items-center justify-center">
         <Dashboard _address={address}/>

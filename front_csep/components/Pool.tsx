@@ -23,10 +23,11 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { Label } from "@radix-ui/react-label";
+import { rippleOffset } from "@/lib/utils";
 
 const invoices = [
   {
-    poolAddress: "rDNCYaJJKS7Nbtr1A9ReERL53NXrjsnaSY",
+    poolAddress: "rHCde2G2447A9cTvNLLXtTxdG9GQ3qZAy1",
     poolName: "XRP reserve fund #3",
     asset: "XRP",
     description: "4,384,948",
@@ -34,7 +35,7 @@ const invoices = [
     lengthOfDeposit: "5 years (fixed)",
   },
   {
-    poolAddress: "rHCde2G2447A9cTvNLLXtTxdG9GQ3qZAy1",
+    poolAddress: "rDNCYaJJKS7Nbtr1A9ReERL53NXrjsnaSY",
     poolName: "FirstRand South Africa bond 2025",
     asset: "USDT",
     description: "847,119",
@@ -42,7 +43,7 @@ const invoices = [
     lengthOfDeposit: "1 year (fixed)",
   },
   {
-    poolAddress: "rDmUtoNpmQmkpM6nqsDNoeAhwMR4U2jwMN",
+    poolAddress: "rL3fuHGsJGwHx55uyociJ8fK5rRKAtyfSs",
     poolName: "Bitcoin infrastructure mining Chile",
     asset: "WBTC",
     description: "150",
@@ -73,7 +74,6 @@ export const Pool = ({
   );
 
   const payment = async () => {
-    const rippleOffset = 946684800; //ripple initial epoch
 
     const release_date_unix = Math.floor(
       new Date("2029-04-07T00:00:00Z").getTime() / 1000

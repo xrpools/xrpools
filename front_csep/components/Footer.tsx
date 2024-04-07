@@ -1,18 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
-import sdk from "@crossmarkio/sdk";
+import React from "react";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export const Footer = () => {
-  const [walletPayload, setWalletPayload] = useState(
-    {} as { request: any; response: any; createdAt: any; resolvedAt: any }
-  );
-
   return (
     <footer className="top-0 left-0 w-full bg-white shadow-md z-10">
-        <div className="mx-auto px-4 py-2 justify-between text-center">
-        <Link href="/institutional" className="text-black-600 visited:text-black">Institutional access</Link> - <Link href="#" className="text-black-600 visited:text-black">Create pool</Link>
+      <div className="mx-auto px-4 py-1 justify-between text-center">
+        <Button>
+          <Link href="/institutional" className="">
+            Institutional access
+          </Link>
+        </Button>
       </div>
     </footer>
   );
