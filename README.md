@@ -20,9 +20,10 @@ Our platform leverages the XRPL escrow function to allow crypto holders to safel
 
 ## Features
 
-- Features: Wallet whitelisting, KYC compliance, interest-earning crypto pools, transparent transactions, and secure asset holding.
-- Future States**: Expansion to include a broader range of cryptocurrencies, deeper integration with traditional financial products, and advanced smart contract functionalities for automated pool management and payouts.
-
+- Wallet whitelisting 
+- KYC compliance 
+- interest-earning crypto pools
+- transparent transactions, and secure asset holding
 
 ### POC 
 
@@ -49,11 +50,14 @@ The sum of all escrows amount pointing to the account is the reserve. Its decrea
 
 ### Future paths
 
+Future States: Expansion to include a broader range of cryptocurrencies, deeper integration with traditional financial products, and advanced smart contract functionalities for automated pool management and payouts.
+
 #### Enforce the interest payments
 
 - Use a reverse escrow locking the interest
 - Use a layer 2 EVM smart contract 
 - Use the Xahau hooks
+
 
 #### Provide KYCs infrastructure 
 
