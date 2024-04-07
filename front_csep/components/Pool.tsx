@@ -112,7 +112,7 @@ export const Pool = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Fund name</TableHead>
+            <TableHead>Name</TableHead>
             <TableHead>Asset</TableHead>
             <TableHead>Remaining</TableHead>
             <TableHead>APY</TableHead>

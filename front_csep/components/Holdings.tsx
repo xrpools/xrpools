@@ -15,7 +15,7 @@ export const Deposits = ({ _holdingPools }: { _holdingPools: PoolModel[] }) => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Fund name</TableHead>
+          <TableHead>Name</TableHead>
           <TableHead>Asset</TableHead>
           <TableHead>Amount</TableHead>
           <TableHead>APY</TableHead>
