@@ -6,6 +6,8 @@
 
 - Earn interest on crypto securely, without losing it.
 
+[ Video - XRPools a project explanation](https://youtu.be/j6P_SvBxrfE)
+
 ## Pitch Description
 Bridge crypto holdings with traditional finance to earn interest without asset transfer. A transparent, secure platform for crypto investors and institutions to grow together.
 
