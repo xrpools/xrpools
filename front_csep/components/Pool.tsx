@@ -76,7 +76,7 @@ export const Pool = ({
     const rippleOffset = 946684800; //ripple initial epoch
 
     const release_date_unix = Math.floor(
-      new Date("2024-12-31T00:00:00Z").getTime() / 1000
+      new Date("2029-04-07T00:00:00Z").getTime() / 1000
     );
     const release_date_ripple = release_date_unix - rippleOffset;
     if (amount.amount < 10) return;
