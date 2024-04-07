@@ -50,6 +50,7 @@ export const BankDashboard = ({_address, wss}:{_address:string, wss: string|null
   
   return (
     <div className="w-4/5 h-4/5 mx-auto mt-16 flex flex-col">
+      <b>Institutional</b>
       <div className="flex-2 p-4 pb-32 m-1 rounded shadow">
         <div>
           <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded shadow float-right"
