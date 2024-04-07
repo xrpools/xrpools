@@ -1,5 +1,7 @@
 export const BankDashboard = () => {
   return (
+    <></>
+    /*
     <form action={ publishPool }>
       <div>
         <label htmlFor="pool-name">Name</label>
@@ -29,5 +31,6 @@ export const BankDashboard = () => {
       </div>
       <input type="submit" value="publish pool" />
     </form>
+    */
   );
 }

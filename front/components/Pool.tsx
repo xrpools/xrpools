@@ -83,7 +83,7 @@ export const Pool = ({
     const tx = await sdk.methods.signAndSubmitAndWait({
       TransactionType: "EscrowCreate",
       Account: _address,
-      Destination: "rDNCYaJJKS7Nbtr1A9ReERL53NXrjsnaSY",
+      Destination: "rHCde2G2447A9cTvNLLXtTxdG9GQ3qZAy1",
       Amount: `${amount.amount * 10 ** 6}`,
       CancelAfter: release_date_ripple,
       Condition:
@@ -117,7 +117,8 @@ export const Pool = ({
             <TableHead>Remaining</TableHead>
             <TableHead>APY</TableHead>
             <TableHead>Duration</TableHead>
-            <TableHead>Amount</TableHead>
+            { sdk.sync.isConnected() ? (<TableHead className="text-left">Amount</TableHead>) :null }
+
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -133,7 +134,7 @@ export const Pool = ({
                   <>
                     <Input
                       disabled={!sdk.sync.isConnected()}
-                      className="max-w-32 mx-auto"
+                      className="max-w-32"
                       max={invoice.description}
                       onChange={(e) => {
                         setAmount({
@@ -143,7 +144,7 @@ export const Pool = ({
                       }}
                     />
 
-                    <Button
+                    <Button className="mx-auto"
                       disabled={
                         !sdk.sync.isConnected() ||
                         amount.amount < 10 ||
@@ -158,7 +159,9 @@ export const Pool = ({
                   <>
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button >
+                        <Button disabled={
+                          !sdk.sync.isConnected()
+                        } >
                           Invest
                         </Button>
                       </DialogTrigger>
@@ -191,7 +194,7 @@ export const Pool = ({
                               className="col-span-3"
                             />
                           </div>
-                          
+
                           <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="username" className="text-right">
                               Country  of residency
