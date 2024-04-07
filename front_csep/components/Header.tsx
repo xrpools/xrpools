@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import sdk from "@crossmarkio/sdk";
+import Link from "next/link";
 export const Header = (
   { setAddress, setWss }: { setAddress:(_address : string) => void, setWss: (wss: string|null) => void }) => {
   const [user, setUser] = useState({ address: "" } as {
@@ -18,7 +19,7 @@ export const Header = (
     <header className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
       <div className="mx-auto px-20 py-2 flex justify-between items-center">
         <div className="logo ml-4">
-          <b>{`{XRPools}`}</b>
+        <Link href="/" className="text-black-600 visited:text-black"><b>{`{XRPools}`}</b></Link>
         </div>
 
         <div className="login px-20">
