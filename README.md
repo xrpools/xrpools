@@ -55,8 +55,8 @@ Future States: Expansion to include a broader range of cryptocurrencies, deeper 
 #### Enforce the interest payments
 
 - Use a reverse escrow locking the interest
-- Use a layer 2 EVM smart contract 
-- Use the Xahau hooks
+- Use a [sidechain EVM](https://opensource.ripple.com/docs/evm-sidechain/intro-to-evm-sidechain/) smart contract 
+- Use the [Xahau](https://xahau.network/) hooks
 
 
 #### Provide KYCs infrastructure 
