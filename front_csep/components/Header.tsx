@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import sdk from "@crossmarkio/sdk";
-import Link from "next/link";
+import Link from 'next/link';
+
 export const Header = (
   { setAddress, setWss }: { setAddress:(_address : string) => void, setWss: (wss: string|null) => void }) => {
   const [user, setUser] = useState({ address: "" } as {

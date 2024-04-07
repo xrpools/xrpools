@@ -38,7 +38,7 @@ export const BankDashboard = ({_address, wss}:{_address:string, wss: string|null
           description: 'unknown',
           interestOffered: 'unknown',
           lengthOfDeposit: 'until ' + new Date(data.CancelAfter * 1000),
-          amount:data.amount,
+          amount: data.Amount / 10 ** 6,
           tx : data.PreviousTxnID,
         })))
       });
